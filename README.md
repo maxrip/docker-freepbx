@@ -80,7 +80,7 @@ Clone this repository and build the image with `docker build --platform amd64 -t
 
 ```bash
 git tag -a v16 -m "16 Release"
-git push origin v16.0
+git push origin v16
 ```
 
 This will automatically build this release image and push it to Dockerhub.
@@ -88,8 +88,8 @@ This will automatically build this release image and push it to Dockerhub.
 ### Deleting Tags
 
 ```bash
-git tag -d 16.0
-git push --delete origin 16.0
+git tag -d v16
+git push --delete origin v16
 ```
 
 ### Prebuilt Images
