@@ -1,13 +1,12 @@
-FROM tiredofit/debian:buster
+FROM --platform=linux/x86_64 debian:bullseye
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Set defaults
 ENV ASTERISK_VERSION=18.15.1 \
     BCG729_VERSION=1.0.4 \
-    DONGLE_VERSION=20200610 \
     G72X_CPUHOST=penryn \
     G72X_VERSION=0.1 \
-    MONGODB_VERSION=4.2 \
+    MONGODB_VERSION=6.0 \
     PHP_VERSION=5.6 \
     SPANDSP_VERSION=20180108 \
     RTP_START=18000 \
@@ -21,16 +20,18 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     \
 ### Install dependencies
     set -x && \
-    curl -sSLk https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo "deb https://deb.nodesource.com/node_10.x $(cat /etc/os-release |grep "VERSION=" | awk 'NR>1{print $1}' RS='(' FS=')') main" > /etc/apt/sources.list.d/nodejs.list && \
-    echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/deb.sury.org.list && \
-    curl -sSLk https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | apt-key add - && \
-    echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/${MONGODB_VERSION} main" > /etc/apt/sources.list.d/mongodb-org.list && \
-    echo "deb http://ftp.us.debian.org/debian/ buster-backports main" > /etc/apt/sources.list.d/backports.list && \
-    echo "deb-src http://ftp.us.debian.org/debian/ buster-backports main" >> /etc/apt/sources.list.d/backports.list && \
     apt-get update && \
-    apt-get -o Dpkg::Options::="--force-confold" dongle -y && \
+    apt install -y gnupg curl lsb-release && \
+    curl -sSLk https://packages.sury.org/php/apt.gpg | apt-key add - && \
+    # curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    # echo "deb https://deb.nodesource.com/node_10.x $(cat /etc/os-release |grep "VERSION=" | awk 'NR>1{print $1}' RS='(' FS=')') main" > /etc/apt/sources.list.d/nodejs.list && \
+    # echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/deb.sury.org.list && \
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
+    curl -sSLk https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | apt-key add - && \
+    echo "deb http://repo.mongodb.org/apt/debian/ $(lsb_release -sc)/mongodb-org/${MONGODB_VERSION} main" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list && \
+    echo "deb http://ftp.us.debian.org/debian/ $(lsb_release -sc)-backports main" > /etc/apt/sources.list.d/backports.list && \
+    echo "deb-src http://ftp.us.debian.org/debian/ $(lsb_release -sc)-backports main" >> /etc/apt/sources.list.d/backports.list && \
+    apt-get update && \
     \
 ### Install development dependencies
     ASTERISK_BUILD_DEPS='\
@@ -43,7 +44,6 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                         flex \
                         graphviz \
                         libasound2-dev \
-                        libbluetooth-dev \
                         libc-client2007e-dev \
                         libcfg-dev \
                         libcodec2-dev \
@@ -52,7 +52,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                         libcurl4-openssl-dev \
                         libedit-dev \
                         libfftw3-dev \
-                        libgmime-2.6-dev \
+                        libgmime-3.0-dev \
                         libgsm1-dev \
                         libical-dev \
                         libiksemel-dev \
@@ -60,7 +60,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                         libldap2-dev \
                         liblua5.2-dev \
                         libmariadb-dev \
-                        libmariadbclient-dev \
+                        libmariadb-dev-compat \
                         libmp3lame-dev \
                         libncurses5-dev \
                         libneon27-dev \
@@ -111,16 +111,16 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                     libc-client2007e \
                     libcfg7 \
                     libcpg4 \
-                    libgmime-2.6 \
+                    libgmime-3.0 \
                     libical3 \
                     libiodbc2 \
                     libiksemel3 \
-                    libicu63 \
+                    libicu67 \
                     libicu-dev \
                     libneon27 \
                     libosptk4 \
                     libresample1 \
-                    libsnmp30 \
+                    libsnmp-base \
                     libspeexdsp1 \
                     libsrtp2-1 \
                     libunbound8 \

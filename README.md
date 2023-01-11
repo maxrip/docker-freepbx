@@ -14,8 +14,8 @@
 Dockerfile to build a [FreePBX](https://www.freepbx.org) - A Voice over IP manager for Asterisk.
 Upon starting this image it will give you a turn-key PBX system for SIP calling.
 
-* Latest release FreePBX 15
-* Latest release Asterisk 17
+* Latest release FreePBX 16
+* Latest release Asterisk 18
 * Choice of running embedded database or modifies to support external MariaDB Database and only require one DB.
 * Supports data persistence
 * Fail2Ban installed to block brute force attacks
@@ -74,7 +74,23 @@ You will also need an external MySQL/MariaDB container, although it can use an i
 ## Installation
 
 ### Build from Source
-Clone this repository and build the image with `docker build -t (imagename) .`
+Clone this repository and build the image with `docker build --platform amd64 -t (imagename) .`
+
+### Tagging an Image for Release
+
+```bash
+git tag -a 16 -m "16 Release"
+git push origin 16
+```
+
+This will automatically build this release image and push it to Dockerhub.
+
+### Deleting Tags
+
+```bash
+git tag -d 16
+git push --delete origin 16
+```
 
 ### Prebuilt Images
 Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/freepbx) and is the recommended method of installation.
@@ -89,6 +105,7 @@ The following image tags are available along with their tagged release based on 
 | Version | Container OS | FreePBX Version | Tag      |
 | ------- | ------------ | --------------- | -------- |
 | latest  | Debian       | 15.x            | `latest` |
+| 16      | Debian       | 16.x            | `16`     |
 | 15      | Debian       | 15.x            | `15`     |
 | 14      | Debian       | 14.x            | `14`     |
 
