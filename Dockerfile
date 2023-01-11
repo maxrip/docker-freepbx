@@ -281,6 +281,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     mv /var/run/asterisk /assets/config/var/run/ && \
     mv /var/lib/mysql /assets/config/var/lib/ && \
     mkdir -p /assets/config/var/spool && \
+    mkdir -p /var/spool/cron && \
     mv /var/spool/cron /assets/config/var/spool/ && \
     ln -s /data/var/spool/cron /var/spool/cron && \
     mkdir -p /var/run/mongodb && \
