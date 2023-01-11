@@ -2,7 +2,7 @@ FROM tiredofit/debian:buster
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Set defaults
-ENV ASTERISK_VERSION=17.9.4 \
+ENV ASTERISK_VERSION=18.15.1 \
     BCG729_VERSION=1.0.4 \
     DONGLE_VERSION=20200610 \
     G72X_CPUHOST=penryn \
@@ -30,7 +30,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     echo "deb http://ftp.us.debian.org/debian/ buster-backports main" > /etc/apt/sources.list.d/backports.list && \
     echo "deb-src http://ftp.us.debian.org/debian/ buster-backports main" >> /etc/apt/sources.list.d/backports.list && \
     apt-get update && \
-    apt-get -o Dpkg::Options::="--force-confold" upgrade -y && \
+    apt-get -o Dpkg::Options::="--force-confold" dongle -y && \
     \
 ### Install development dependencies
     ASTERISK_BUILD_DEPS='\
@@ -246,17 +246,6 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     ./configure --prefix=/usr --with-bcg729 --enable-$G72X_CPUHOST && \
     make && \
     make install && \
-    \
-#### Add USB Dongle support
-    git clone https://github.com/rusxakep/asterisk-chan-dongle /usr/src/asterisk-chan-dongle && \
-    cd /usr/src/asterisk-chan-dongle && \
-    git checkout tags/$DONGLE_VERSION && \
-    ./bootstrap && \
-    ./configure --with-astversion=$ASTERISK_VERSION && \
-    make && \
-    make install && \
-    \
-    ldconfig && \
     \
 ### Cleanup
     mkdir -p /var/run/fail2ban && \
