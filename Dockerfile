@@ -107,7 +107,6 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                     iptables \
                     lame \
                     libavahi-client3 \
-                    libbluetooth3 \
                     libc-client2007e \
                     libcfg7 \
                     libcpg4 \
@@ -185,7 +184,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     ./configure \
         --with-jansson-bundled \
         --with-pjproject-bundled \
-        --with-bluetooth \
+        --without-bluetooth \
         --with-codec2 \
         --with-crypto \
         --with-gmime \
