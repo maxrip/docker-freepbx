@@ -99,6 +99,12 @@ Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tired
 docker pull tiredofit/freepbx:(imagetag)
 ```
 
+Pull the CC image:
+
+```bash
+docker pull ghcr.io/coloradocommunications/freepbx:v16 
+```
+
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
 
