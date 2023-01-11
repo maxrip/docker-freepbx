@@ -223,16 +223,16 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                           --disable app_voicemail_imap \
                           --disable app_voicemail_odbc \
                           --disable res_digium_phone \
-                          --disable codec_g729a && \
-                          --disable chan_phone && \
-                          --disable chan_iax2 && \
-                          --disable chan_mgcp && \
-                          --disable chan_misdn && \
-                          --disable chan_oss && \
-                          --disable chan_skinny && \
-                          --disable chan_unistim && \
-                          --disable chan_vpb && \
-                          --disable chan_motif && \
+                          --disable codec_g729a \
+                          --disable chan_phone \
+                          --disable chan_iax2 \
+                          --disable chan_mgcp \
+                          --disable chan_misdn \
+                          --disable chan_oss \
+                          --disable chan_skinny \
+                          --disable chan_unistim \
+                          --disable chan_vpb \
+                          --disable chan_motif \
 \
     make && \
     make install && \
