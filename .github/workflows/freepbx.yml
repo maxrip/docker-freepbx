@@ -3,7 +3,9 @@ name: Build Asterisk + FreePBX in Docker
 on:
   push:
     tags:
-      - 16*
+      - v16*
+      - v17*
+      - v18*
     paths:
       - 'install/**'
       - '.github/workflows/freepbx.yml'
