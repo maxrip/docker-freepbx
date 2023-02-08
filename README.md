@@ -131,6 +131,13 @@ The following image tags are available along with their tagged release based on 
 
 Login to the web server's admin URL (default /admin) and enter in your admin username, admin password, and email address and start configuring the system!
 
+### Whack all Containers
+
+```bash
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+```
+
 ### Persistent Storage
 
 The container supports data persistence and during Dockerfile build creates symbolic links for

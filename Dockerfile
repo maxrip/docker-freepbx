@@ -2,7 +2,7 @@ FROM --platform=linux/x86_64 debian:bullseye
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Set defaults
-ENV ASTERISK_VERSION=18.15.1 \
+ENV ASTERISK_VERSION=18.16.0 \
     BCG729_VERSION=1.0.4 \
     G72X_CPUHOST=penryn \
     G72X_VERSION=0.1 \
