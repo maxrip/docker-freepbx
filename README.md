@@ -148,6 +148,20 @@ The following directories should be mapped for persistent storage in order to ut
 | `/data`          | Data persistence for Asterisk and FreePBX and FOP                                                     |
 | `/assets/custom` | *OPTIONAL* - If you would like to overwrite some files in the container,                              |
 |                  | put them here following the same folder structure for anything underneath the /var/www/html directory |
+
+### Database
+
+```bash
+apt-get install mariadb-server
+service mariadb start
+systemctl enable mariadb
+mysql
+CREATE DATABASE asterisk;
+CREATE USER 'asterisk'@'localhost' IDENTIFIED BY 'asterisk';
+GRANT FILE ON *.* TO 'asterisk'@'localhost';
+FLUSH privileges;
+```
+
 ### Environment Variables
 
 #### Base Images used
