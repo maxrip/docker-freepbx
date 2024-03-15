@@ -15,7 +15,7 @@ Dockerfile to build a [FreePBX](https://www.freepbx.org) - A Voice over IP manag
 Upon starting this image it will give you a turn-key PBX system for SIP calling.
 
 * Latest release FreePBX 16
-* Latest release Asterisk 18
+* Latest release Asterisk 20
 * Choice of running embedded database or modifies to support external MariaDB Database and only require one DB.
 * Supports data persistence
 * Fail2Ban installed to block brute force attacks

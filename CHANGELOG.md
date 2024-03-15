@@ -1,3 +1,14 @@
+## 5.2.0 2024-03-15 <maxrip at gmail dot com>
+
+   ### Added
+      - Support latest tiredofit/debian base images
+
+   ### Changed
+      - Update PHP_VERSION 7.4
+      - Update to Asterisk 20
+
+
+
 ## 5.2.0 2022-04-29 <dave at tiredofit dot ca>
 
    ### Added
