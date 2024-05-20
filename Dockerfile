@@ -4,7 +4,7 @@ LABEL maintainer="Maxim (maxrip at gmail dot com)"
 
 
 ### Set defaults
-ENV ASTERISK_VERSION=20.6.0 \
+ENV ASTERISK_VERSION=20.8.1 \
     BCG729_VERSION=1.1.1 \
     G72X_CPUHOST=penryn \
     G72X_BRANCH=20 \
@@ -71,7 +71,9 @@ ENV ASTERISK_VERSION=20.6.0 \
                         subversion \
                         unixodbc-dev \
                         uuid-dev \
-                        zlib1g-dev'
+                        zlib1g-dev \
+                        g++ \
+                        git'
                         
 ### Pin libxml2 packages to Debian repositories
 RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
@@ -102,8 +104,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                     ffmpeg \
                     flite \
                     freetds-dev \
-                    git \
-                    g++ \
+
                     iptables \
                     lame \
                     libavahi-client3 \
